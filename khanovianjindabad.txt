@@ -1,0 +1,50 @@
+use workspace;
+
+create table user_table (ID int identity primary key, 
+Name varchar(50), 
+Email varchar(50), 
+Addresses varchar(50), 
+Category int, 
+Product int,
+Price int);
+
+INSERT INTO user_table (Name, Email, Addresses, Category, Product, Price)
+VALUES ('Khanovian', 'Khanovian@gmail.com', 'Karachi', 1, 1, 1);
+
+create table category (ID int identity primary key,
+Category varchar(50),
+Product_Code int);
+
+INSERT INTO category (Category, Product_Code)
+VALUES ('Clothes', 327856);
+
+create table Products (ID int identity primary key,
+Product varchar(50),
+Price int);
+
+INSERT INTO Products (Product, Price)
+VALUES ('Adidas T-Shirt', 1500);
+
+ALTER TABLE user_table
+Add Foreign Key (category) REFERENCES Category(ID);
+
+
+ALTER TABLE user_table
+Add Foreign Key (Product) REFERENCES Products(ID);
+
+
+ALTER TABLE user_table
+Add Foreign Key (Price) REFERENCES Products(ID);
+
+Select user_table.Name, user_table.Email, user_table.Addresses, category.category, Products.product, Products.Price
+from user_table
+INNER JOIN Category ON user_table.Category = Category.ID
+INNER JOIN Products ON user_table.Product = Products.ID
+
+
+
+
+
+
+
+
